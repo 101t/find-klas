@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+        Hide the Cost field (and its label) on the product template form for
+        users who are not in the "Show Product Cost" group.
+    -->
+    <record id="product_template_form_view_cost_visibility" model="ir.ui.view">
+        <field name="name">product.template.form.cost.visibility</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='standard_price']" position="attributes">
+                <attribute name="groups">product_cost_visibility.group_product_cost_visibility</attribute>
+            </xpath>
+            <xpath expr="//label[@for='standard_price']" position="attributes">
+                <attribute name="groups">product_cost_visibility.group_product_cost_visibility</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!--
+        Same restriction on the product variant form.
+    -->
+    <record id="product_normal_form_view_cost_visibility" model="ir.ui.view">
+        <field name="name">product.product.form.cost.visibility</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='standard_price']" position="attributes">
+                <attribute name="groups">product_cost_visibility.group_product_cost_visibility</attribute>
+            </xpath>
+            <xpath expr="//label[@for='standard_price']" position="attributes">
+                <attribute name="groups">product_cost_visibility.group_product_cost_visibility</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
