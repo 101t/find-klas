@@ -8,6 +8,7 @@ class ResConfigSettings(models.TransientModel):
         comodel_name='res.users',
         string='Users Allowed to See Product Cost',
         compute='_compute_product_cost_user_ids',
+        inverse='_inverse_product_cost_user_ids',
         readonly=False,
         store=False,
         help="Users selected here are allowed to see the Cost field on the "
@@ -24,10 +25,10 @@ class ResConfigSettings(models.TransientModel):
     def _compute_product_cost_user_ids(self):
         group = self._get_cost_group()
         for setting in self:
-            setting.product_cost_user_ids = group.users if group else False
+            setting.product_cost_user_ids = group.user_ids if group else False
 
-    def set_values(self):
-        super().set_values()
+    def _inverse_product_cost_user_ids(self):
         group = self._get_cost_group()
         if group:
-            group.sudo().users = [(6, 0, self.product_cost_user_ids.ids)]
+            for setting in self:
+                group.sudo().user_ids = [(6, 0, setting.product_cost_user_ids.ids)]

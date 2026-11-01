@@ -14,7 +14,8 @@ Odoo 19 custom module that controls **who can see the product Cost field**
    left behind.
 4. Under **Settings → General Settings → Product Cost Visibility**, an
    administrator selects the users who are allowed to see the cost. Saving the
-   setting syncs the selected users into the security group.
+   setting writes the selected users to the security group through the field's
+   inverse method.
 
 The administrator (`base.user_admin`) is added to the group by default so the
 cost stays visible right after installation.
