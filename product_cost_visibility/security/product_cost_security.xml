@@ -10,9 +10,8 @@
     -->
     <record id="group_product_cost_visibility" model="res.groups">
         <field name="name">Show Product Cost</field>
-        <field name="category_id" ref="base.module_category_hidden"/>
         <field name="comment">Users in this group can see the Cost field on the product screen.</field>
-        <field name="users" eval="[(4, ref('base.user_admin'))]"/>
+        <field name="user_ids" eval="[(4, ref('base.user_admin'))]"/>
     </record>
 
 </odoo>
